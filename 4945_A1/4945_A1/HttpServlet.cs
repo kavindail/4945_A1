@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -26,7 +27,6 @@ namespace _4945_A1 {
                 Thread thread = new Thread(new ThreadStart(processor.process));
                 thread.Start();
                 Thread.Sleep(1);
-
             }
         }
 

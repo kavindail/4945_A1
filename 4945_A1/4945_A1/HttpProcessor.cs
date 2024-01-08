@@ -2,6 +2,8 @@ using System;
 using System.Net.Sockets;
 using System.IO;
 using System.Collections.Specialized;
+using System.Globalization;
+using System.Text;
 using System.Threading;
 
 
@@ -25,37 +27,49 @@ public class HttpProcessor {
     }
 
     private string streamReadLine(Stream inputStream) {
+        StringBuilder data = new StringBuilder();
         int next_char;
-        string data = "";
+        bool lastCharWasCR = false;
+
         while (true) {
             next_char = inputStream.ReadByte();
-            if (next_char == '\n') { break; }
-            if (next_char == '\r') { continue; }
-            if (next_char == -1) { Thread.Sleep(1); continue; };
-            data += Convert.ToChar(next_char);
-        }            
-        return data;
+            if (next_char == '\r') { // Carriage return
+                lastCharWasCR = true;
+            } else if (next_char == '\n' && lastCharWasCR) { // Line feed following carriage return
+                break;
+            } else {
+                lastCharWasCR = false;
+                data.Append(Convert.ToChar(next_char));
+            }
+        }
+
+        string result = data.ToString();
+        // Check if the result is an empty line, indicating the end of headers
+        if (string.IsNullOrWhiteSpace(result)) {
+            return null;
+        }
+
+        return result;
     }
 
+
+    
     public void process() {
         inputStream = new BufferedStream(socket.GetStream());
         outputStream = new StreamWriter(new BufferedStream(socket.GetStream()));
-        try {
 
             parseRequest();
             readHeaders();
            
             if (http_method.Equals("GET")) {
                 srv.handleGetRequest(this);
-            } else if (http_method.Equals("POST")) {
+                
+            }
+            else if (http_method.Equals("POST")) {
                 srv.handlePostRequest(this, new StreamReader(inputStream));
             }
             
             
-        } catch (Exception e) {
-            Console.WriteLine("Exception: " + e.ToString());
-            writeFailure();
-        }
         outputStream.Flush();
         inputStream.Close();
         outputStream.Close();
@@ -71,21 +85,11 @@ public class HttpProcessor {
         http_method = tokens[0].ToUpper();
         http_url = tokens[1];
         http_protocol_versionstring = tokens[2];
-       
-        // Console.WriteLine("Http method");
-        // Console.WriteLine(http_method);
-        // Console.WriteLine("Http Url");
-        // Console.WriteLine(http_url);
-        // Console.WriteLine("Http Url");
-        // Console.WriteLine(http_protocol_versionstring);
-        
-        
     }
 
     public void readHeaders() {
-        Console.WriteLine("readHeaders()");
         String line;
-        while ((line = streamReadLine(inputStream)) != null) {
+        while ((line = streamReadLine(inputStream)) != null ) {
             if (line.Equals("")) {
                 return;
             }
@@ -100,7 +104,9 @@ public class HttpProcessor {
             }
             string value = line.Substring(pos, line.Length - pos);
             httpHeaders[name] = value;
+            
         }
+        Console.WriteLine("Content-Length: " + httpHeaders["Content-Length"]);
     }
 
     public void writeSuccess() {

@@ -16,8 +16,8 @@ namespace _4945_A1
             p.outputStream.WriteLine("url : {0}", p.http_url);
         
             p.outputStream.WriteLine("<form method=post action=/form>");
-            p.outputStream.WriteLine("<input type=text name=foo value=foovalue>");
-            p.outputStream.WriteLine("<input type=submit name=submit value=submit>");
+            p.outputStream.WriteLine("<input type=text name=data>");
+            p.outputStream.WriteLine("<input type=submit>");
             p.outputStream.WriteLine("</form>");     
         }
 
@@ -26,15 +26,23 @@ namespace _4945_A1
         {
             
             Console.WriteLine("POST request: {0}", p.http_url);
-            string data = inputData.ReadToEnd();
-        
-            p.outputStream.WriteLine("<html><body><h1>test server</h1>");
-            p.outputStream.WriteLine("<a href=/test>return</a><p>");
-            p.outputStream.WriteLine("postbody: <pre>{0}</pre>", data);
-            Console.WriteLine("Data start");
-            Console.WriteLine(data);
-            Console.WriteLine("Data end");
+            string contentLengthHeader = p.httpHeaders.Get("Content-Length");
+            if (contentLengthHeader != null)
+            {
+                
+                int contentLength = Convert.ToInt32(contentLengthHeader);
+                Console.WriteLine(contentLength);
 
+                String data = inputData.ReadToEnd();
+                Console.WriteLine("Data start");
+                Console.WriteLine(data);
+                Console.WriteLine("Data end");
+            }
+            else
+            {
+                p.outputStream.WriteLine("<html><body><h1>Error</h1>");
+                p.outputStream.WriteLine("<p>Content-Length header is missing.</p>");
+            }
         }
     }
 }
