@@ -1,0 +1,6 @@
+/Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/bin/Debug/_4945_A1.exe
+/Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/bin/Debug/_4945_A1.pdb
+/Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/obj/Debug/4945_A1.csproj.AssemblyReference.cache
+/Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/obj/Debug/4945_A1.csproj.CoreCompileInputs.cache
+/Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/obj/Debug/_4945_A1.exe
+/Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/obj/Debug/_4945_A1.pdb
