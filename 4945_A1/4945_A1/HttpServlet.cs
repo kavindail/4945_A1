@@ -24,9 +24,8 @@ namespace _4945_A1 {
             {
                 TcpClient client = listener.AcceptTcpClient();
                 HttpProcessor processor = new HttpProcessor(client, this);
-                Thread thread = new Thread(new ThreadStart(processor.process));
+                Thread thread = new Thread(processor.process);
                 thread.Start();
-                Thread.Sleep(1);
             }
         }
 
