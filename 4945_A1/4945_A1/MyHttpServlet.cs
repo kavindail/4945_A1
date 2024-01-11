@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading;
 
 namespace _4945_A1
@@ -21,9 +23,8 @@ namespace _4945_A1
             p.outputStream.WriteLine("<body>");
             p.outputStream.WriteLine("<h1>Test Server</h1>");
             p.outputStream.WriteLine($"<p>URL: {p.http_url}</p>");
-
-            p.outputStream.WriteLine("<form method=\"post\" action=\"/form\">");
-            p.outputStream.WriteLine("<input type=\"text\" name=\"data\">");
+            p.outputStream.WriteLine("<form method=\"post\" action=\"/form\" enctype=\"multipart/form-data\">");
+            p.outputStream.WriteLine("<input type=\"file\" id=\"data\" name=\"filename\">");
             p.outputStream.WriteLine("<input type=\"submit\">");
             p.outputStream.WriteLine("</form>");
             p.outputStream.WriteLine("</body>");
@@ -40,10 +41,32 @@ namespace _4945_A1
             if (contentLengthHeader != null)
             {
                 int contentLength = Convert.ToInt32(contentLengthHeader);
+                Console.WriteLine("content length converted:" + contentLength);
                 char[] buffer = new char[contentLength];
                 inputData.ReadBlock(buffer, 0, contentLength);
                 String data = new String(buffer);
+                
+               //Need to make this remove the whole line not just ------ 
+                if (data.Contains("-----"))
+                {
+                    data = data.Replace("-----", ""); 
+                    Console.WriteLine("Data replaced");
+                }
+                
+                //Need to parse before and cut off uneccesary data and then convert to bytes
+                
+                
+                byte[] bytes = Encoding.UTF8.GetBytes(data);
+
+                // foreach (byte b in bytes)
+                // {
+                //     string binary = Convert.ToString(b, 2).PadLeft(8, '0');
+                //     Console.WriteLine(binary);
+                // }                
+                
+                Console.WriteLine("Data start ---------------------------------------------------------------------------------------------------------");
                 Console.WriteLine(data);
+                Console.WriteLine("Data end---------------------------------------------------------------------------------------------------------");
             }
             else
             {

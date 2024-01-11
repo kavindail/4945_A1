@@ -41,7 +41,7 @@ namespace _4945_A1 {
             Console.WriteLine("Processing input stream" + inputStream);
 
             outputStream.Flush();
-            // outputStream.Close();
+            outputStream.Close();
             socket.Close();
         }
 
