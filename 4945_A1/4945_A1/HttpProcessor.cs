@@ -79,7 +79,7 @@ namespace _4945_A1 {
 
         public void writeSuccess() {
             outputStream.WriteLine("HTTP/1.0 200 OK");
-            outputStream.WriteLine("Content-Type: text/html");
+            outputStream.WriteLine("Content-Type: text/html"); // Set to text/html for HTML content
             outputStream.WriteLine("Connection: close");
             outputStream.WriteLine("");
         }

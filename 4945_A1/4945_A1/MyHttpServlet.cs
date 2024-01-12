@@ -39,36 +39,42 @@ namespace _4945_A1
             string contentLengthHeader = p.httpHeaders.Get("Content-Length");
             Console.WriteLine(contentLengthHeader);
             if (contentLengthHeader != null)
+                
             {
                 int contentLength = Convert.ToInt32(contentLengthHeader);
                 Console.WriteLine("content length converted:" + contentLength);
                 char[] buffer = new char[contentLength];
                 inputData.ReadBlock(buffer, 0, contentLength);
+                
                 String data = new String(buffer);
+                int myIndex = data.IndexOf("Content-Type");
+                String newData = data.Substring(myIndex + 24, contentLength - myIndex - 24);
                 
-               //Need to make this remove the whole line not just ------ 
-                if (data.Contains("-----"))
-                {
-                    data = data.Replace("-----", ""); 
-                    Console.WriteLine("Data replaced");
-                }
+                int newLength = newData.Length;
+                Console.WriteLine("New content length: " + newLength);
                 
-                //Need to parse before and cut off uneccesary data and then convert to bytes
+                int myNewIndex = newData.IndexOf("------");
                 
-                
-                byte[] bytes = Encoding.UTF8.GetBytes(data);
+                String newDatav2 = newData.Substring(myNewIndex , newLength - myNewIndex );
 
-                // foreach (byte b in bytes)
-                // {
-                //     string binary = Convert.ToString(b, 2).PadLeft(8, '0');
-                //     Console.WriteLine(binary);
-                // }                
+                //Trimmed data is just the binary data for the image 
+                String trimmedData = newData.Replace(newDatav2, "");
+                trimmedData.Trim();
                 
-                Console.WriteLine("Data start ---------------------------------------------------------------------------------------------------------");
-                Console.WriteLine(data);
-                Console.WriteLine("Data end---------------------------------------------------------------------------------------------------------");
+                
+                byte[] bytes = Encoding.UTF8.GetBytes(trimmedData);
+                // This code can convert the text binary into real binary to translate into an image 
+                foreach (byte b in bytes)
+                {
+                    string binary = Convert.ToString(b, 2);
+                    Console.WriteLine(binary);
+                }                
+                
+                // Console.WriteLine("Data start ---------------------------------------------------------------------------------------------------------");
+                // Console.WriteLine(trimmedData);
+                // Console.WriteLine("Data end---------------------------------------------------------------------------------------------------------");
             }
-            else
+             else
             {
                 p.outputStream.WriteLine("<html><body><h1>Error</h1>");
                 p.outputStream.WriteLine("<p>Content-Length header is missing.</p>");
