@@ -21,7 +21,6 @@ namespace _4945_A1
             p.outputStream.WriteLine("<title>Test Server</title>");
             p.outputStream.WriteLine("</head>");
             p.outputStream.WriteLine("<body>");
-            p.outputStream.WriteLine("<h1>Test Server</h1>");
             p.outputStream.WriteLine($"<p>URL: {p.http_url}</p>");
             p.outputStream.WriteLine("<form method=\"post\" action=\"/form\" enctype=\"multipart/form-data\">");
             p.outputStream.WriteLine("<input type=\"file\" id=\"data\" name=\"filename\">");
