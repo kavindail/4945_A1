@@ -3,14 +3,41 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace _4945_A1
 {
     public class MyHttpServlet : HttpServlet
     {
+        public Image ByteArrayToImage(byte[] bytesArr)
+        {
+            if (bytesArr == null || bytesArr.Length == 0)
+            {
+                throw new ArgumentException("Byte array is null or empty.");
+            }
+            try
+            {
+                using (MemoryStream ms = new MemoryStream(bytesArr))
+                {
+                    return Image.FromStream(ms);
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                throw new InvalidOperationException("The byte array does not represent a valid image.", ex);
+            }
+        }
+        
+        
+    public void SaveImageToFile(Image image, string filePath)
+    {
+        ImageFormat format = ImageFormat.Png; 
+        image.Save(filePath, format);
+    }    
         private int count = 0;
         public MyHttpServlet(int port) : base(port) {}
-
         public override void handleGetRequest(HttpProcessor p)
         {
             Console.WriteLine("request: {0}", p.http_url);
@@ -41,7 +68,6 @@ namespace _4945_A1
                 
             {
                 int contentLength = Convert.ToInt32(contentLengthHeader);
-                Console.WriteLine("content length converted:" + contentLength);
                 char[] buffer = new char[contentLength];
                 inputData.ReadBlock(buffer, 0, contentLength);
                 
@@ -50,28 +76,23 @@ namespace _4945_A1
                 String newData = data.Substring(myIndex + 24, contentLength - myIndex - 24);
                 
                 int newLength = newData.Length;
-                Console.WriteLine("New content length: " + newLength);
-                
                 int myNewIndex = newData.IndexOf("------");
-                
                 String newDatav2 = newData.Substring(myNewIndex , newLength - myNewIndex );
 
-                //Trimmed data is just the binary data for the image 
                 String trimmedData = newData.Replace(newDatav2, "");
-                trimmedData.Trim();
-                
+                Console.WriteLine(trimmedData);
                 
                 byte[] bytes = Encoding.UTF8.GetBytes(trimmedData);
-                // This code can convert the text binary into real binary to translate into an image 
-                foreach (byte b in bytes)
-                {
-                    string binary = Convert.ToString(b, 2);
-                    Console.WriteLine(binary);
-                }                
-                
-                // Console.WriteLine("Data start ---------------------------------------------------------------------------------------------------------");
-                // Console.WriteLine(trimmedData);
-                // Console.WriteLine("Data end---------------------------------------------------------------------------------------------------------");
+
+                // try
+                // {
+                //
+                //     Image myImage = ByteArrayToImage(bytes);
+                // }
+                // catch
+                // {
+                //     Console.WriteLine("Got an error");
+                // }
             }
              else
             {

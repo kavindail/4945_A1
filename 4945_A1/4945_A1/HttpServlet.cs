@@ -3,10 +3,17 @@ using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 
+
 namespace _4945_A1 {
     public abstract class HttpServlet
     {
+        
+
+
+        
+        
         protected int port;
+        
         TcpListener listener;
         bool is_active = true;
 
