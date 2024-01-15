@@ -3,40 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace _4945_A1
 {
     public class MyHttpServlet : HttpServlet
     {
-        public Image ByteArrayToImage(byte[] bytesArr)
-        {
-            if (bytesArr == null || bytesArr.Length == 0)
-            {
-                throw new ArgumentException("Byte array is null or empty.");
-            }
-            try
-            {
-                using (MemoryStream ms = new MemoryStream(bytesArr))
-                {
-                    return Image.FromStream(ms);
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                throw new InvalidOperationException("The byte array does not represent a valid image.", ex);
-            }
-        }
-        
-        
-    public void SaveImageToFile(Image image, string filePath)
-    {
-        ImageFormat format = ImageFormat.Png; 
-        image.Save(filePath, format);
-    }    
-        private int count = 0;
         public MyHttpServlet(int port) : base(port) {}
         public override void handleGetRequest(HttpProcessor p)
         {
@@ -82,17 +54,6 @@ namespace _4945_A1
                 String trimmedData = newData.Replace(newDatav2, "");
                 Console.WriteLine(trimmedData);
                 
-                byte[] bytes = Encoding.UTF8.GetBytes(trimmedData);
-
-                // try
-                // {
-                //
-                //     Image myImage = ByteArrayToImage(bytes);
-                // }
-                // catch
-                // {
-                //     Console.WriteLine("Got an error");
-                // }
             }
              else
             {
