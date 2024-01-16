@@ -33,6 +33,7 @@ namespace _4945_A1
         public override void handlePostRequest(HttpProcessor p, StreamReader inputData)
         {
             
+            
             Console.WriteLine("POST request: {0}", p.http_url);
             string contentLengthHeader = p.httpHeaders.Get("Content-Length");
             Console.WriteLine(contentLengthHeader);
@@ -46,7 +47,6 @@ namespace _4945_A1
                 String data = new String(buffer);
                 int myIndex = data.IndexOf("Content-Type");
                 String newData = data.Substring(myIndex + 24, contentLength - myIndex - 24);
-                
                 int newLength = newData.Length;
                 int myNewIndex = newData.IndexOf("------");
                 String newDatav2 = newData.Substring(myNewIndex , newLength - myNewIndex );
