@@ -98,11 +98,13 @@ namespace _4945_A1
         public void getDirectoryListing(String docPath, String userAgent, HttpProcessor p)
         {
             string[] files = Directory.GetFiles(docPath);
-
+            Array.Sort(files);
+            Console.WriteLine("browser connected");
 
             if (userAgent.Contains("Mozilla"))
             {
                 StringBuilder htmlList = new StringBuilder();
+                htmlList.AppendLine("List of Files in this directory in Alphabetical Order: ");
                 htmlList.AppendLine("<ul>");
                 
                 foreach (string file in files)
@@ -119,6 +121,7 @@ namespace _4945_A1
             }
             else
             {
+                Console.WriteLine("console app is connected");
                 JArray jsonArray = new JArray();
 
                 foreach (string file in files)
