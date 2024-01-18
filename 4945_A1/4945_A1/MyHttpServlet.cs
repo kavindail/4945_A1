@@ -69,7 +69,7 @@ namespace _4945_A1
                     using (var reader = new StreamReader(file.Data))
                     {
                         string fileContent = reader.ReadToEnd();
-                        writeToFile(fileName, fileContent, browserOrNativeApp);
+                        writeToFile(fileName, fileContent, browserOrNativeApp,p);
                     }
                 }
                 else
@@ -84,28 +84,38 @@ namespace _4945_A1
             }
         }
 
-        public void writeToFile(String filename, String myFile, String userAgent)
+        public void writeToFile(String filename, String myFile, String userAgent, HttpProcessor p)
         {
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, filename + ".txt")))
             {
                 outputFile.WriteLine(myFile);
-                getDirectoryListing(docPath, userAgent);
+                getDirectoryListing(docPath, userAgent,p);
             }
         }
 
-        public void getDirectoryListing(String docPath, String userAgent)
+        public void getDirectoryListing(String docPath, String userAgent, HttpProcessor p)
         {
             string[] files = Directory.GetFiles(docPath);
 
 
             if (userAgent.Contains("Mozilla"))
             {
+                StringBuilder htmlList = new StringBuilder();
+                htmlList.AppendLine("<ul>");
+                
                 foreach (string file in files)
                 {
-                    Console.WriteLine(file);
+                    htmlList.AppendLine($"<li>{Path.GetFileName(file)}</li>");
                 }
+
+                htmlList.AppendLine("</ul>");
+                
+                // Send the HTML list as part of the HTTP response
+                p.writeSuccess();
+                p.outputStream.WriteLine(htmlList.ToString());
+                
             }
             else
             {
