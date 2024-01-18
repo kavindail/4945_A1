@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.IO;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using HttpMultipartParser;
 
 namespace _4945_A1
@@ -99,10 +100,10 @@ namespace _4945_A1
         {
             string[] files = Directory.GetFiles(docPath);
             Array.Sort(files);
-            Console.WriteLine("browser connected");
 
             if (userAgent.Contains("Mozilla"))
             {
+                Console.WriteLine("browser connected");
                 StringBuilder htmlList = new StringBuilder();
                 htmlList.AppendLine("List of Files in this directory in Alphabetical Order: ");
                 htmlList.AppendLine("<ul>");
@@ -119,7 +120,7 @@ namespace _4945_A1
                 p.outputStream.WriteLine(htmlList.ToString());
                 
             }
-            else
+            else if(userAgent.Contains("MyCustomClientApp/1.0"))
             {
                 Console.WriteLine("console app is connected");
                 JArray jsonArray = new JArray();
@@ -130,7 +131,11 @@ namespace _4945_A1
                 }
 
                 string jsonString = jsonArray.ToString();
-                Console.WriteLine(jsonString);
+                p.outputStream.WriteLine(jsonString);
+            }
+            else
+            {
+                Console.WriteLine("Unexpected error");
             }
         }
     }
