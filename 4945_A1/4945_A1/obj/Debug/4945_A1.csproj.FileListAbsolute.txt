@@ -19,3 +19,23 @@
 /Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/obj/Debug/4945_A1.csproj.CopyComplete
 /Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/bin/Debug/Newtonsoft.Json.dll
 /Users/kavindail/BCIT/Term4/COMP 4945/Assignments/4945_A1/4945_A1/4945_A1/bin/Debug/Newtonsoft.Json.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\_4945_A1.exe
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\_4945_A1.pdb
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\HttpMultipartParser.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Buffers.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Memory.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\HttpMultipartParser.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Memory.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\obj\Debug\4945_A1.csproj.AssemblyReference.cache
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\obj\Debug\4945_A1.csproj.CoreCompileInputs.cache
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\obj\Debug\4945_A1.csproj.CopyComplete
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\obj\Debug\_4945_A1.exe
+C:\Users\pavanpreet\Source\Repos\4945_A1\4945_A1\4945_A1\obj\Debug\_4945_A1.pdb

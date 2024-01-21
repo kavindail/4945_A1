@@ -1,4 +1,5 @@
 # Default ignored files
+.vs/
 /shelf/
 /workspace.xml
 # Rider ignored files
